@@ -1,20 +1,18 @@
-name: Universal Downloader
+name: Python Runner
 
 on:
   workflow_dispatch:
 
 jobs:
-  download:
+  run:
     runs-on: ubuntu-latest
 
     env:
       URLS: |
-
-
         https://bbbb.c2629860576b18c4e67abfd4deeaa712.r2.cloudflarestorage.com/file.zip?X-Amz-Signature=abc
 
     steps:
-      - name: Checkout
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
       - name: Setup Python
@@ -22,12 +20,28 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Run Downloader
+      - name: Install Requirements
         run: |
-          python downloader.py
+          if [ -f requirements.txt ]; then
+            pip install -r requirements.txt
+          fi
 
-      - name: Upload Files
+      - name: Find and Run Python File
+        run: |
+          PY_FILE=$(find . -type f -name "*.py" | head -n 1)
+
+          if [ -z "$PY_FILE" ]; then
+            echo "No Python file found"
+            exit 1
+          fi
+
+          echo "Running: $PY_FILE"
+
+          python "$PY_FILE"
+
+      - name: Upload Downloads
         uses: actions/upload-artifact@v4
         with:
           name: downloaded-files
           path: downloads/
+          if-no-files-found: ignore
