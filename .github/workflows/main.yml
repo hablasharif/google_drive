@@ -10,7 +10,7 @@ jobs:
     env:
       URLS: |
 
-        https://bbbb.c2629860576b18c4e67abfd4deeaa712.r2.cloudflarestorage.com/file.zip?X-Amz-Signature=abc
+        https://bbbb.c2629860576b18c4e67abfd4deeaa712.r2.cloudflarestorage.com/fd076ecf66408d32efcee7a26c39b451/26-50%20Naruto%20Shippuden%20%5BDual%20Audio%5D.zip?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=d5af05f3aceef0318536c2f6bec19a66%2F20260508%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260508T145144Z&X-Amz-SignedHeaders=host&X-Amz-Expires=21600&X-Amz-Signature=e8cfa2d1bed015a42683ca6c0a617ca917fddec945555e6d61053de91554ee43
 
     steps:
       - name: Checkout
